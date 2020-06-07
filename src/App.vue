@@ -1,14 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <WeatherHeader/>
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+      <router-link to="/attributions">Attributions</router-link>
+    </div> -->
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,3 +35,14 @@
   }
 }
 </style>
+<script>
+// @ is an alias to /src
+import WeatherHeader from '@/components/WeatherHeader.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    WeatherHeader
+  }
+}
+</script>
