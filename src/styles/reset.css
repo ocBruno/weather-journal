@@ -19,7 +19,7 @@ time, mark, audio, video {
     margin: 0;
 	padding: 0;
 	border: 0;
-	vertical-align: baseline;
+    vertical-align: baseline;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -122,7 +122,13 @@ html {
     -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
 }
-
+/**
+ * Remove text decorations and default link styles
+ */
+a {
+    text-decoration: none;
+    color: inherit;
+}
 /**
  * Address `outline` inconsistency between Chrome and other browsers.
  */
@@ -202,6 +208,9 @@ select,
 textarea {
     font-size: 100%; /* 1 */
     margin: 0; /* 2 */
+    outline: none;
+    border: none;
+    background: none;
     vertical-align: baseline; /* 3 */
     *vertical-align: middle; /* 3 */
 }

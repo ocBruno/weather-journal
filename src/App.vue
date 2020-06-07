@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Entry</router-link> |
       <router-link to="/attributions">Attributions</router-link>
     </div> -->
     <router-view/>
@@ -10,39 +10,23 @@
 
 <style lang="scss">
 @import '../src/styles/reset.css';
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
 <script>
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
+  name: 'Entry',
 
 }
 </script>

@@ -28,8 +28,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-header {
+footer {
   display: flex;
+  justify-content: center;
 }
 .fade-enter-active {
   transition: opacity .5s
@@ -42,6 +43,5 @@ header {
 .active-geolocation-header {
 margin-left: auto;
 margin-right: auto;
-margin-top: 120px;
 }
 </style>
