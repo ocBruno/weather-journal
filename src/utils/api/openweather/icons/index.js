@@ -1,0 +1,11 @@
+export var ClearSky = (d,n) => `http://openweathermap.org/img/wn/01${d || n}@2x.png`;
+export var FewClouds = (d,n) => `http://openweathermap.org/img/wn/02${d || n}@2x.png`;
+export var ShowerRain = (d,n) => `http://openweathermap.org/img/wn/09${d || n}@2x.png`;
+export var Drizzle = (d,n) => `http://openweathermap.org/img/wn/09${d || n}@2x.png`;
+export var ScatteredClouds = (d,n) => `http://openweathermap.org/img/wn/03${d || n}@2x.png`;
+export var BrokenClouds = (d,n) => `http://openweathermap.org/img/wn/04${d || n}@2x.png`;
+export var Rain = (d,n) => `http://openweathermap.org/img/wn/10${d || n}@2x.png`;
+export var Thunderstorm = (d,n) => `http://openweathermap.org/img/wn/11${d || n}@2x.png`;
+export var Snow = (d,n) => `http://openweathermap.org/img/wn/13${d || n}@2x.png`;
+export var Mist = (d,n) => `http://openweathermap.org/img/wn/50${d || n}@2x.png`;
+export var Other = (d,n) => `http://openweathermap.org/img/wn/50${d || n}@2x.png`;

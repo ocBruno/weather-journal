@@ -9,7 +9,7 @@
             :weatherDescription="weatherDescription"
             :dailyTemperatureCels="dailyTemperatureCels"
             :dailyTemperatureFahr="dailyTemperatureFahr"
-            :date="this.$store.date"
+            :date="date"
          />
         <WeatherFooter/>
     </main>
@@ -57,7 +57,6 @@ export default {
                 this.weatherDescription = res.data.current.weather[0].description;
                 this.dailyTemperatureCels =  res.data.current.temp  - 273.15;
                 this.dailyTemperatureFahr =  this.dailyTemperatureCels * 9/5 + 32;
-                console.log(this.dailyTemperatureFahr);
 
                 this.$store.commit('updateWeatherDetails', {weatherDescription: this.weatherDescription ,dailyTemperatureCels: this.dailyTemperatureCels,dailyTemperatureFahr: this.dailyTemperatureFahr });
                 });
@@ -78,11 +77,11 @@ export default {
     },
     computed: {
         date: function() {
-        return this.$store.state.date
+          console.log(this.$store.state.date)
+          return this.$store.state.date
         },
         weatherDetails: function() {
-        console.log(this.$store)
-        return this.$store.state.weatherDetails
+          return this.$store.state.weatherDetails
         },
     },
     async created() {

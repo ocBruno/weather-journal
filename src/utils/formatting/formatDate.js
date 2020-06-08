@@ -26,10 +26,16 @@ export function formatDate(date) {
     const month = months[date.getMonth()];
     const day = date.getUTCDate();
     const year = date.getUTCFullYear();
+    const hours = date.getHours();
+    var isDayTime = hours > 6 && hours < 20;
+
     return {
         weekday: weekday,
         month: month,
         day: day,
-        year: year
+        year: year,
+        hours: hours,
+        isDaytime: isDayTime,
+        isNighttime: !isDayTime
     }
 }

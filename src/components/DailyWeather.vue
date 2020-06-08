@@ -1,47 +1,75 @@
 <template>
-<main>
-  <header aria-label="current-location">
-    <section v-if="date" class="date-wrapper">
-      {{ date.weekday }},
-      {{ date.month }}
-      {{ date.day }},
-      {{ date.year }}
-  </section>
-  </header>
-  <section class="daily-weather" aria-label="daily-weather">
+  <main>
+    <section class="daily-weather" aria-label="daily-weather">
       <div class="current-forecast" aria-label="current-forecast">
-        {{weatherDescriptionFormatted}}
+        <h2>{{ weatherDescriptionFormatted }}</h2>
+        <img class="active-weather-icon" :src="activeIcon" />
       </div>
-      <div v-if="isCelsius" aria-label="celsius-temperature">{{dailyTemperatureCelsFormatted}}</div>
-      <div v-if="!isCelsius" aria-label="fahrenheit-temperature">{{dailyTemperatureFahr}}</div>
-  </section>
-</main>
+      <div
+        v-if="isCelsius"
+        class="celsius-temp"
+        aria-label="celsius-temperature"
+      >
+        {{ dailyTemperatureCelsFormatted }}<span>C°</span>
+      {{isDay}}
+
+      </div>
+      <div
+        v-if="!isCelsius"
+        class="fahrenheit-temp"
+        aria-label="fahrenheit-temperature"
+      >
+        {{ dailyTemperatureFahr }}<span>F°</span>
+
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
+import * as icons from "../utils/api/openweather/icons";
 
 export default {
   name: "DailyWeather",
   props: {
     weatherDescription: String,
     dailyTemperatureCels: Number,
-    dailyTemperatureFahr: Number
+    dailyTemperatureFahr: Number,
+    weatherIcon: undefined,
+    date: Object
   },
   data() {
     return {
-      isCelsius: true
+      isCelsius: true,
+      icons,
     };
   },
   computed: {
     weatherDescriptionFormatted() {
-      return this.weatherDescription.charAt(0).toUpperCase() + this.weatherDescription.slice(1)
+      return (
+        this.weatherDescription.charAt(0).toUpperCase() +
+        this.weatherDescription.slice(1)
+      );
     },
     dailyTemperatureCelsFormatted() {
-      return this.dailyTemperatureCels.toString().slice(0,4);
+      return this.dailyTemperatureCels.toString().slice(0, 4);
+    },
+    activeIcon() {
+      switch (this.weatherDescription) {
+        case "broken clouds":
+          return icons.BrokenClouds("d");
+        case "moderate rain":
+          return icons.Rain("n");
+        default:
+          return undefined;
+      }
+    },
+    isDay() {
+      return this.date.isDayTime;
     }
   },
-  mounted() {
-  },
+  created() {},
+  mounted() {},
 };
 </script>
 
@@ -55,8 +83,36 @@ export default {
   color: inherit;
   font-weight: 400;
   .current-forecast {
-    font-weight: 500;
-    margin-bottom: 0.66em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      font-size: 1.66em;
+      font-weight: 600;
+      margin-bottom: 1em;
+    }
   }
+}
+.active-weather-icon {
+  background: rgb(84, 162, 197);
+  box-shadow: 0 5px 9px rgb(155, 179, 189);
+  border-radius: 3em;
+  width: 6em;
+  margin-bottom: 1em;
+}
+.celsius-temp,
+.fahreint-temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  border-radius: 3em;
+  padding: 0.66em;
+}
+.celsius-temp > span,
+.fahreint-temp > span {
+  font-weight: 500;
+  font-size: 0.90em;
+  margin-left: 0.33em;
 }
 </style>
