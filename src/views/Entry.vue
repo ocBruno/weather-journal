@@ -9,9 +9,9 @@
         <button
           v-if="!this.$store.isGeoApproved"
           key="continue-button"
-          @click="returnLocationDetails"
+          @click="activateGeolocation"
         >
-          Activate geolocation
+          <span>Activate geolocation</span>
         </button>
       </transition-group>
     </main>
@@ -19,44 +19,24 @@
 </template>
 
 <script>
-import { formatDate } from "../utils/formatting/formatDate";
-import axios from "axios";
 
 export default {
   name: "Entry",
   created() {
-    let date = new Date();
-    this.date = formatDate(date);
+
+  },
+  data() {
+    return { errorStr: '' }
   },
   methods: {
-    async returnLocationDetails() {
+    async activateGeolocation() {
       // has support geolocation?
       if (!("geolocation" in navigator)) {
         this.errorStr = "Geolocation is not available.";
         return;
+      } else {
+          this.$router.push('weather-journal');
       }
-      let lng, lat;
-      // get position
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          this.$store.approveGeoLocation();
-          lat = pos.coords.latitude;
-          lng = pos.coords.longitude;
-          // send a location details retrieval GET request
-          axios({
-            method: "get",
-            // url: `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${this.OPEN_CAGE_KEY}`
-          }).then((res) => {
-            //success location details fetch
-            console.log(lng, lat);
-            this.locationDetails = res.data.results[0].components;
-          });
-        },
-        (err) => {
-          this.$store.approveGeoLocation();
-          this.errorStr = err.message;
-        }
-      );
     },
   },
 };
@@ -65,9 +45,15 @@ export default {
 
 main {
   //<transition-group> renders as <span>
+    background-color: rgb(242, 252, 252);
   h1 {
+    margin-top: 0.66em;
+    margin-bottom: 0.69em;
+    font-weight: 500;
+    width: 30%;
     color: rgb(35, 133, 172);
-  } 
+    font-size: 1.66em;
+  }
   > span {
   display: flex;
   flex-direction: column;
@@ -81,11 +67,21 @@ main {
     margin: 2em auto;
     padding: 1em;
     color: rgb(35, 133, 172);
+    background-color: rgb(248, 252, 252);
     box-shadow: 0px 0.33em 1em rgba(35, 133, 172, 0.33);
     border-top: 1px solid rgb(255, 255, 255);
     border-bottom: 2px solid rgba(35, 133, 172, 0.33);
     border-radius: 0.66em;
     transition: all 300ms ease-in;
+    &:hover {
+    color: rgb(15, 107, 143);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0.33em 1em rgba(35, 133, 172, 0.45);
+    border-bottom: 2px solid rgba(35, 133, 172, 0.45);
+
+    }
+    > span {
+    }
   }
 }
 </style>

@@ -1,12 +1,15 @@
 <template>
-  <footer class="weather-header" aria-label="Weather-footer">
-    <router-link to="/attributions">Attributions</router-link>
+  <footer aria-label="Weather-footer">
+    <nav>
+      <a href="https://github.com/ocBruno/weather-journal">Github</a>
+      <router-link to="/attributions">Attributions</router-link>
+    </nav>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'WeatherHeader',
+  name: 'WeatherFooter',
   props: {
     msg: String
   },
@@ -29,8 +32,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 footer {
+
+  margin-top: auto;
+  margin-bottom: 2em;
+  font-size: 10px;
+  width: 39em;
+  margin-left: auto;
+  margin-right: auto;
+}
+nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 .fade-enter-active {
   transition: opacity .5s
