@@ -136,6 +136,6 @@ export default {
   margin-left: 0.33em;
 }
 .toggle-temp-unit-switch {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 </style>

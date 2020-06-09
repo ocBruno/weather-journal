@@ -16,7 +16,6 @@ export default {
 </script>
 <style scoped lang="scss">
 body {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

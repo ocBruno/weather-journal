@@ -11,6 +11,7 @@
             :dailyTemperatureFahr="dailyTemperatureFahr"
             :date="this.$store.state.date"
          />
+         <Journal/>
         <WeatherFooter/>
     </main>
 </template>
@@ -20,11 +21,13 @@ import KEY from "../utils/api/opencage/key.json";
 
 import WeatherFooter from '@/components/WeatherFooter'
 import DailyWeather from '@/components/DailyWeather'
+import Journal from '@/components/Journal'
 
 export default {
     name: "WeatherJournal",
     components: {
         WeatherFooter,
+        Journal,
         DailyWeather
     },
     data() {
@@ -89,7 +92,6 @@ export default {
 main {
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 header {
   display: flex;

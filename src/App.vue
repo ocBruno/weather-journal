@@ -12,11 +12,10 @@ body {
   font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+  height: 100%;
   color:  rgb(35, 133, 172);
 }
 #app {
-  height: 100vh;
 
 }
 .isNightTime {
