@@ -24,5 +24,14 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+  },
+  getters: {
+    isDayTime: state => {
+      return state.date.isDayTime === true
+    },
+    isNightTime: state => {
+      console.log(state.date)
+      return state.date.isNightTime === true
+    },
   }
 })

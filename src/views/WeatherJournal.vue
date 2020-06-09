@@ -2,14 +2,14 @@
     <main>
         <header>
             <transition name="fade">
-                <img src="../assets/sun-logo.png" class="small-sun-logo" alt />
+                <img :src="require(`@/assets/${this.$store.getters.isDayTime ? 'sun' : 'moon'}-logo.png`)" class="small-sun-logo" alt />
             </transition>
         </header>
         <DailyWeather 
             :weatherDescription="weatherDescription"
             :dailyTemperatureCels="dailyTemperatureCels"
             :dailyTemperatureFahr="dailyTemperatureFahr"
-            :date="date"
+            :date="this.$store.state.date"
          />
         <WeatherFooter/>
     </main>
@@ -76,10 +76,6 @@ export default {
     }
     },
     computed: {
-        date: function() {
-          console.log(this.$store.state.date)
-          return this.$store.state.date
-        },
         weatherDetails: function() {
           return this.$store.state.weatherDetails
         },

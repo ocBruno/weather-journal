@@ -3,7 +3,16 @@
     <section class="daily-weather" aria-label="daily-weather">
       <div class="current-forecast" aria-label="current-forecast">
         <h2>{{ weatherDescriptionFormatted }}</h2>
-        <img class="active-weather-icon" :src="activeIcon" />
+        <img
+          :class="[
+            {
+              'night-time-shadow': this.$store.getters.isNightTime === true,
+              'day-time-shadow': this.$store.getters.isDayTime === true,
+            },
+            'active-weather-icon',
+          ]"
+          :src="activeIcon"
+        />
       </div>
       <div
         v-if="isCelsius"
@@ -11,8 +20,6 @@
         aria-label="celsius-temperature"
       >
         {{ dailyTemperatureCelsFormatted }}<span>C°</span>
-      {{isDay}}
-
       </div>
       <div
         v-if="!isCelsius"
@@ -20,7 +27,15 @@
         aria-label="fahrenheit-temperature"
       >
         {{ dailyTemperatureFahr }}<span>F°</span>
-
+      </div>
+      <div class="is-day-time">
+        {{
+          this.$store.state.date.isDayTime
+            ? "day"
+            : this.$store.state.date.isNightTime
+            ? "night"
+            : "error"
+        }}
       </div>
     </section>
   </main>
@@ -36,7 +51,7 @@ export default {
     dailyTemperatureCels: Number,
     dailyTemperatureFahr: Number,
     weatherIcon: undefined,
-    date: Object
+    date: Object,
   },
   data() {
     return {
@@ -64,11 +79,10 @@ export default {
           return undefined;
       }
     },
-    isDay() {
-      return this.date.isDayTime;
-    }
   },
-  created() {},
+  created() {
+    console.log();
+  },
   mounted() {},
 };
 </script>
@@ -95,10 +109,15 @@ export default {
 }
 .active-weather-icon {
   background: rgb(84, 162, 197);
-  box-shadow: 0 5px 9px rgb(155, 179, 189);
   border-radius: 3em;
   width: 6em;
   margin-bottom: 1em;
+}
+.is-day-time {
+  display: block;
+  text-transform: capitalize;
+  font-size: 0.75em;
+  font-weight: 600;
 }
 .celsius-temp,
 .fahreint-temp {
@@ -112,7 +131,7 @@ export default {
 .celsius-temp > span,
 .fahreint-temp > span {
   font-weight: 500;
-  font-size: 0.90em;
+  font-size: 0.9em;
   margin-left: 0.33em;
 }
 </style>

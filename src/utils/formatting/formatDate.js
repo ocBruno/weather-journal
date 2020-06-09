@@ -27,7 +27,7 @@ export function formatDate(date) {
     const day = date.getUTCDate();
     const year = date.getUTCFullYear();
     const hours = date.getHours();
-    var isDayTime = hours > 6 && hours < 20;
+    var isDayTime = hours > 6 && hours < 18;
 
     return {
         weekday: weekday,
@@ -35,7 +35,7 @@ export function formatDate(date) {
         day: day,
         year: year,
         hours: hours,
-        isDaytime: isDayTime,
-        isNighttime: !isDayTime
+        isDayTime: isDayTime,
+        isNightTime: !isDayTime
     }
 }
