@@ -26,26 +26,23 @@
         class="fahrenheit-temp"
         aria-label="fahrenheit-temperature"
       >
-        {{ dailyTemperatureFahr }}<span>F°</span>
+        {{ dailyTemperatureFahrFormatted }}<span>F°</span>
       </div>
-      <div class="is-day-time">
-        {{
-          this.$store.state.date.isDayTime
-            ? "day"
-            : this.$store.state.date.isNightTime
-            ? "night"
-            : "error"
-        }}
-      </div>
+
+      <ToggleTempUnitSwitch :toggleUnitType="this.toggleUnitType" class="toggle-temp-unit-switch"/>
     </section>
   </main>
 </template>
 
 <script>
-import * as icons from "../utils/api/openweather/icons";
+import * as ICONS from "../utils/api/openweather/icons";
+import ToggleTempUnitSwitch from "./inputs/ToggleTempUnitSwitch";
 
 export default {
   name: "DailyWeather",
+  components: {
+    ToggleTempUnitSwitch
+  },
   props: {
     weatherDescription: String,
     dailyTemperatureCels: Number,
@@ -53,10 +50,16 @@ export default {
     weatherIcon: undefined,
     date: Object,
   },
+  methods: {
+    toggleUnitType() {
+      console.log(this.isCelsius)
+      this.isCelsius = !this.isCelsius;
+    }
+  },
   data() {
     return {
       isCelsius: true,
-      icons,
+      ICONS,
     };
   },
   computed: {
@@ -69,12 +72,15 @@ export default {
     dailyTemperatureCelsFormatted() {
       return this.dailyTemperatureCels.toString().slice(0, 4);
     },
+    dailyTemperatureFahrFormatted() {
+      return this.dailyTemperatureFahr.toString().slice(0, 4);
+    },
     activeIcon() {
       switch (this.weatherDescription) {
         case "broken clouds":
-          return icons.BrokenClouds("d");
+          return ICONS.BrokenClouds("d");
         case "moderate rain":
-          return icons.Rain("n");
+          return ICONS.Rain("n");
         default:
           return undefined;
       }
@@ -113,14 +119,9 @@ export default {
   width: 6em;
   margin-bottom: 1em;
 }
-.is-day-time {
-  display: block;
-  text-transform: capitalize;
-  font-size: 0.75em;
-  font-weight: 600;
-}
+
 .celsius-temp,
-.fahreint-temp {
+.fahrenheit-temp {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,9 +130,12 @@ export default {
   padding: 0.66em;
 }
 .celsius-temp > span,
-.fahreint-temp > span {
+.fahrenheit-temp > span {
   font-weight: 500;
   font-size: 0.9em;
   margin-left: 0.33em;
+}
+.toggle-temp-unit-switch {
+  margin-bottom: 1em;
 }
 </style>
